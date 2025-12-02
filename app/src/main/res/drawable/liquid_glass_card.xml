@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Glass surface with blur effect simulation -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/glass_surface" />
+            <corners android:radius="28dp" />
+            <stroke 
+                android:width="1dp" 
+                android:color="@color/glass_border" />
+        </shape>
+    </item>
+    
+    <!-- Inner glow effect -->
+    <item android:insetTop="1dp" android:insetBottom="1dp" 
+          android:insetLeft="1dp" android:insetRight="1dp">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/glass_surface_light" />
+            <corners android:radius="27dp" />
+        </shape>
+    </item>
+    
+    <!-- Subtle gradient overlay -->
+    <item android:insetTop="2dp" android:insetBottom="2dp" 
+          android:insetLeft="2dp" android:insetRight="2dp">
+        <shape android:shape="rectangle">
+            <gradient
+                android:type="linear"
+                android:angle="135"
+                android:startColor="#1A00F5FF"
+                android:centerColor="#0D8A2BE2"
+                android:endColor="#0AFF1493" />
+            <corners android:radius="26dp" />
+        </shape>
+    </item>
+</layer-list>

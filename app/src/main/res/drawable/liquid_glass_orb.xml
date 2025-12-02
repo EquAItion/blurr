@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Outer glow ring -->
+    <item>
+        <shape android:shape="oval">
+            <gradient
+                android:type="radial"
+                android:gradientRadius="125dp"
+                android:startColor="#4000F5FF"
+                android:centerColor="#2600F5FF"
+                android:endColor="#00000000" />
+        </shape>
+    </item>
+    
+    <!-- Main orb base -->
+    <item android:insetTop="25dp" android:insetBottom="25dp" 
+          android:insetLeft="25dp" android:insetRight="25dp">
+        <shape android:shape="oval">
+            <gradient
+                android:type="radial"
+                android:gradientRadius="100dp"
+                android:startColor="#8000F5FF"
+                android:centerColor="#4D8A2BE2"
+                android:endColor="#33FF1493" />
+        </shape>
+    </item>
+    
+    <!-- Inner liquid gradient -->
+    <item android:insetTop="35dp" android:insetBottom="35dp" 
+          android:insetLeft="35dp" android:insetRight="35dp">
+        <shape android:shape="oval">
+            <gradient
+                android:type="sweep"
+                android:startColor="#FF00F5FF"
+                android:centerColor="#FF8A2BE2"
+                android:endColor="#FFFF1493" />
+        </shape>
+    </item>
+    
+    <!-- Glass highlight -->
+    <item android:insetTop="45dp" android:insetBottom="85dp" 
+          android:insetLeft="45dp" android:insetRight="85dp">
+        <shape android:shape="oval">
+            <solid android:color="#66FFFFFF" />
+        </shape>
+    </item>
+</layer-list>
