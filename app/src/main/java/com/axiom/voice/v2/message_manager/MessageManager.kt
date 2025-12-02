@@ -46,6 +46,7 @@ class MemoryManager(
      * The primary method to update the memory and generate the next prompt.
      * This should be called once per agent step.
      */
+    @RequiresApi(Build.VERSION_CODES.O)
     fun createStateMessage(
         modelOutput: AgentOutput?,
         result: List<ActionResult>?,

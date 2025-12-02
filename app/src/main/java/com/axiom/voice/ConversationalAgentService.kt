@@ -11,6 +11,7 @@ import android.graphics.PixelFormat
 import android.graphics.drawable.GradientDrawable
 import android.animation.ValueAnimator
 import android.app.PendingIntent
+import android.content.Context
 import android.graphics.Typeface
 import android.graphics.drawable.LayerDrawable
 import android.os.Build
@@ -96,6 +97,7 @@ class ConversationalAgentService : Service() {
     private var hasHeardFirstUtterance = false // Track if we've received the first user utterance
     private lateinit var firebaseAnalytics: FirebaseAnalytics
     private val eyes by lazy { Eyes(this) }
+    private lateinit var perception: Perception
 
     
     // Firebase instances for conversation tracking
@@ -131,6 +133,7 @@ class ConversationalAgentService : Service() {
         usedMemories.clear() // Clear used memories for new conversation
         hasHeardFirstUtterance = false // Reset first utterance flag
 
+        OverlayDispatcher.clearAll()
         overlayManager.startObserving()
         visualFeedbackManager.showSpeakingOverlay() // <-- ADD THIS LINE
         visualFeedbackManager.showTtsWave()
@@ -279,20 +282,7 @@ class ConversationalAgentService : Service() {
                 mainHandler.postDelayed({
                     visualFeedbackManager.hideTranscription()
                 }, 500)
-                
-                // Mark that we've heard the first utterance and trigger memory extraction
-                if (!hasHeardFirstUtterance) {
-                    hasHeardFirstUtterance = true
-                    Log.d("ConvAgent", "First utterance received, triggering memory extraction")
-                    serviceScope.launch {
-                        try {
-                            updateSystemPromptWithMemories()
-                        } catch (e: Exception) {
-                            Log.e("ConvAgent", "Error during first utterance memory extraction", e)
-                            // Continue execution even if memory extraction fails
-                        }
-                    }
-                }
+
                 
                 processUserInput(recognizedText)
             },
@@ -349,9 +339,9 @@ class ConversationalAgentService : Service() {
     private suspend fun speakAndThenListen(text: String, draw: Boolean = true) {
         // Only update system prompt with memories if we've heard the first utterance
 //        if (hasHeardFirstUtterance) {
-            updateSystemPromptWithMemories()
+//            updateSystemPromptWithMemories()
 //        }
-
+        updateSystemPromptWithTime()
         pandaStateManager.setState(PandaState.SPEAKING)
         speechCoordinator.speakText(text)
         Log.d("ConvAgent", "Panda said: $text")
@@ -380,7 +370,7 @@ class ConversationalAgentService : Service() {
                     Log.d("ConvAgent", "First utterance received, triggering memory extraction")
                     serviceScope.launch {
                         try {
-                            updateSystemPromptWithMemories()
+                            updateSystemPromptWithScreenContext()
                         } catch (e: Exception) {
                             Log.e("ConvAgent", "Error during first utterance memory extraction", e)
                             // Continue execution even if memory extraction fails
@@ -505,13 +495,14 @@ class ConversationalAgentService : Service() {
         serviceScope.launch {
             removeClarificationQuestions()
             updateSystemPromptWithAgentStatus()
-            
+            updateSystemPromptWithScreenContext()
+
             // Mark that we've heard the first utterance and trigger memory extraction if not already done
             if (!hasHeardFirstUtterance) {
                 hasHeardFirstUtterance = true
                 Log.d("ConvAgent", "First utterance received via processUserInput, triggering memory extraction")
                 try {
-                    updateSystemPromptWithMemories()
+                    updateSystemPromptWithScreenContext()
                 } catch (e: Exception) {
                     Log.e("ConvAgent", "Error during first utterance memory extraction", e)
                     // Continue execution even if memory extraction fails
@@ -782,6 +773,7 @@ class ConversationalAgentService : Service() {
             5. Always ask for clarification if the user's request is ambiguous or unclear.
             6. When the user ask to sing, shout or produce any sound, just generate text, we will sing it for you.
             7. Your code is opensource so you can tell tell that to user. repo is ayush0chaudhary/blurr
+            8. Give a warning for the tasks related to banking, games, shopping and app with Canvas (no a11y tree) that you wont be able to do them properly but you will try your best.
             
             Use these memories to answer the user's question with his personal data
             ### Memory Context Start ###
@@ -807,9 +799,31 @@ class ConversationalAgentService : Service() {
             - "Reply": The text to speak to the user. This is a confirmation for a "Task", or the direct answer for a "Reply".
             - "Instruction": The precise, literal instruction for the task agent. This field should be an empty string "" if the "Type" is not "Task".
             - "Should End": Must be either "Continue" or "Finished". Use "Finished" only when the conversation is naturally over.
+        
+            Current Time : {time_context}
         """.trimIndent()
 
         conversationHistory = addResponse("user", systemPrompt, emptyList())
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun updateSystemPromptWithTime() {
+
+        val currentPromptText = conversationHistory.firstOrNull()?.second
+            ?.filterIsInstance<TextPart>()?.firstOrNull()?.text ?: return
+
+        val currentTime = java.time.ZonedDateTime.now(java.time.ZoneId.systemDefault())
+        val formatter = java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss z")
+        val formattedTime = currentTime.format(formatter)
+
+        val timeContext = "Current Date and Time: $formattedTime"
+
+        val updatedPromptText = currentPromptText.replace("{time_context}", timeContext)
+
+        // Replace the first system message with the updated prompt
+        conversationHistory = conversationHistory.toMutableList().apply {
+            set(0, "user" to listOf(TextPart(updatedPromptText)))
+        }
     }
 
     private fun updateSystemPromptWithAgentStatus() {
@@ -836,60 +850,20 @@ class ConversationalAgentService : Service() {
     }
 
     /**
-     * Gets current screen context using the Eyes class
-     */
-    @RequiresApi(Build.VERSION_CODES.R)
-    private suspend fun getScreenContext(): String {
-        return try {
-            val currentApp = eyes.getCurrentActivityName()
-            val screenXml = eyes.openXMLEyes()
-            val keyboardStatus = eyes.getKeyBoardStatus()
-            
-            // Track screen context usage
-            val screenContextBundle = android.os.Bundle().apply {
-                putString("current_app", currentApp.take(50)) // Limit length for analytics
-                putBoolean("keyboard_visible", keyboardStatus)
-                putInt("screen_xml_length", screenXml.length)
-            }
-            firebaseAnalytics.logEvent("screen_context_captured", screenContextBundle)
-            
-            """
-            Current App: $currentApp
-            Keyboard Visible: $keyboardStatus
-            Screen Content:
-            $screenXml
-            """.trimIndent()
-        } catch (e: Exception) {
-            Log.e("ConvAgent", "Error getting screen context", e)
-            
-            // Track screen context errors
-            val errorBundle = android.os.Bundle().apply {
-                putString("error_message", e.message?.take(100) ?: "Unknown error")
-                putString("error_type", e.javaClass.simpleName)
-            }
-            firebaseAnalytics.logEvent("screen_context_error", errorBundle)
-            
-            "Screen context unavailable"
-        }
-    }
-
-    /**
      * Updates the system prompt with relevant memories and current screen context
      */
     @RequiresApi(Build.VERSION_CODES.R)
-    private suspend fun updateSystemPromptWithMemories() {
+    private suspend fun updateSystemPromptWithScreenContext() {
         try {
-            // Get current screen context
-            val screenContext = getScreenContext()
-            Log.d("ConvAgent", "Retrieved screen context: ${screenContext.take(200)}...")
-            
-            // Get current prompt
-            val currentPrompt = conversationHistory.first().second
-                .filterIsInstance<TextPart>()
-                .firstOrNull()?.text ?: ""
+
+            perception = Perception(Eyes(this), SemanticParser())
+            val analysis = perception.analyze(all = true)
+            Log.d("ConvAgent", "Screen analysis: ${analysis.uiRepresentation}")
+            val currentPrompt = conversationHistory.firstOrNull()?.second
+                ?.filterIsInstance<TextPart>()?.firstOrNull()?.text ?: return
 
             // Update screen context first
-            var updatedPrompt = currentPrompt.replace("{screen_context}", screenContext)
+            var updatedPrompt = currentPrompt.replace("{screen_context}", analysis.uiRepresentation)
 
             // Check if memory is enabled before processing memories
             if (!MEMORY_ENABLED) {
@@ -996,7 +970,7 @@ class ConversationalAgentService : Service() {
             val instruction = json.optString("Instruction", "")
             val shouldEndStr = json.optString("Should End", "Continue")
             val shouldEnd = shouldEndStr.equals("Finished", ignoreCase = true)
-
+            
             // Add a fallback reply if the model provides an empty one for a conversational turn.
             val finalReply = if (reply.isEmpty() && type.equals("Reply", ignoreCase = true)) {
                 "I'm not sure how to respond to that."
@@ -1355,7 +1329,6 @@ class ConversationalAgentService : Service() {
         super.onDestroy()
         Log.d("ConvAgent", "Service onDestroy")
         
-        // Track service destruction
         overlayManager.stopObserving()
         firebaseAnalytics.logEvent("conversational_agent_destroyed", null)
         

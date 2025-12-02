@@ -96,7 +96,27 @@ class Agent(
             state.consecutiveFailures = 0
             state.lastModelOutput = agentOutput
             Log.d(TAG, agentOutput.toString())
+            Log.d(TAG, agentOutput.toString())
             Log.d(TAG,"🤖 LLM decided: ${agentOutput.nextGoal}")
+
+            // Show thoughts if enabled
+            val sharedPrefs = context.getSharedPreferences("BlurrSettings", Context.MODE_PRIVATE)
+            if (sharedPrefs.getBoolean(SettingsActivity.KEY_SHOW_THOUGHTS, false)) {
+                val thoughtText = buildString {
+                    agentOutput.thinking?.let { if (it.isNotEmpty()) append("Thinking: ${agentOutput.thinking}\n") }
+                    agentOutput.memory?.let { if (it.isNotEmpty()) append("Memory: ${agentOutput.memory}\n") }
+                    agentOutput.nextGoal?.let { if (it.isNotEmpty()) append("Next Goal: ${agentOutput.nextGoal}") }
+                }.trim()
+
+                if (thoughtText.isNotEmpty()) {
+                    OverlayDispatcher.show(
+                        text = thoughtText,
+                        priority = OverlayPriority.TASKS,
+                        duration = 8000L, // Show for 8 seconds
+                        position = OverlayPosition.TOP
+                    )
+                }
+            }
 
             // 4. ACT: Execute the LLM's planned actions.
             Log.d(TAG,"💪 Executing actions...")
