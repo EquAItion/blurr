@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@drawable/liquid_glass_background"
     android:fillViewport="true">
 
     <LinearLayout
@@ -268,7 +268,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            android:background="@drawable/pricing_card_background"
+            android:background="@drawable/liquid_glass_card"
             android:orientation="vertical"
             android:padding="24dp">
 
@@ -317,7 +317,7 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginBottom="16dp"
-            android:background="@drawable/purchase_button_background"
+            android:background="@drawable/liquid_glass_button"
             android:text="Start Pro Subscription"
             android:textColor="@color/black"
             android:textSize="16sp"

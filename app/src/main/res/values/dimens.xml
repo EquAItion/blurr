@@ -1,9 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Delta symbol dimensions -->
-    <dimen name="delta_symbol_size">500dp</dimen>
-    <dimen name="status_text_margin_top">24dp</dimen>
+    <!-- Modern Glassmorphic Design System Dimensions -->
     
-    <!-- Navigation delta dimensions -->
-    <dimen name="delta_nav_size">32dp</dimen>
+    <!-- Glass Corner Radius -->
+    <dimen name="glass_corner_radius_small">16dp</dimen>
+    <dimen name="glass_corner_radius_medium">24dp</dimen>
+    <dimen name="glass_corner_radius_large">32dp</dimen>
+    
+    <!-- Spacing System -->
+    <dimen name="spacing_xs">4dp</dimen>
+    <dimen name="spacing_sm">8dp</dimen>
+    <dimen name="spacing_md">16dp</dimen>
+    <dimen name="spacing_lg">24dp</dimen>
+    <dimen name="spacing_xl">32dp</dimen>
+    <dimen name="spacing_xxl">48dp</dimen>
+    
+    <!-- Component Dimensions -->
+    <dimen name="button_height">56dp</dimen>
+    <dimen name="input_height">56dp</dimen>
+    <dimen name="card_elevation">8dp</dimen>
+    
+    <!-- Delta/Orb Dimensions -->
+    <dimen name="delta_symbol_size">280dp</dimen>
+    <dimen name="status_text_margin_top">32dp</dimen>
+    <dimen name="delta_nav_size">48dp</dimen>
+    
+    <!-- Navigation -->
+    <dimen name="nav_height">88dp</dimen>
+    <dimen name="nav_icon_size">28dp</dimen>
 </resources>

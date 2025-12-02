@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_solid"
+    android:background="@drawable/liquid_glass_background"
     android:fitsSystemWindows="true"
     tools:context=".triggers.ui.TriggersActivity">
 
@@ -12,10 +12,10 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
+        android:background="@drawable/liquid_glass_card"
         app:title="Your Triggers"
         android:fontFamily="@font/playfair_display"
-        app:titleTextColor="@color/white" />
+        app:titleTextColor="@color/text_primary" />
 
     <LinearLayout
         android:id="@+id/trigger_options_container"
@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Enable Triggers"
-            android:textColor="@color/white" />
+            android:textColor="@color/text_primary" />
 
         <TextView
             android:id="@+id/triggers_not_working_text"
@@ -61,10 +61,10 @@
         android:layout_margin="16dp"
         android:text="Add Trigger"
         app:icon="@drawable/ic_add"
-        android:fontFamily="@font/oxanium"
+        android:fontFamily="@font/inter"
         app:iconTint="@color/white"
-        android:textColor="@color/white"
-        app:backgroundTint="@color/button_blue"
+        android:textColor="@color/text_primary"
+        android:background="@drawable/liquid_glass_fab"
         android:contentDescription="Add new trigger" />
 
 </RelativeLayout>

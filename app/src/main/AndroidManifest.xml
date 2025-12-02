@@ -243,7 +243,7 @@
             android:enabled="true"
             android:exported="false">
             <intent-filter>
-                <action android:name="com.blurr.voice.action.EXECUTE_TASK" />
+                <action android:name="com.axiom.voice.action.EXECUTE_TASK" />
             </intent-filter>
         </receiver>
 

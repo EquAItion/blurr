@@ -1,4 +1,4 @@
-package com.blurr.voice.utilities
+package com.axiom.voice.utilities
 
 import android.content.Context
 import org.junit.Before

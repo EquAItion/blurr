@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/liquid_glass_background"
     android:orientation="vertical">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -22,14 +23,26 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginEnd="12dp"
+            android:background="@drawable/liquid_glass_input"
             android:hint="Type a message"
-            android:inputType="text" />
+            android:inputType="text"
+            android:padding="16dp"
+            android:textColor="@color/text_primary"
+            android:textColorHint="@color/text_tertiary" />
 
-        <Button
+        <TextView
             android:id="@+id/sendButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Send" />
+            android:background="@drawable/liquid_glass_button"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:padding="16dp"
+            android:text="Send"
+            android:textColor="@color/text_primary"
+            android:textSize="16sp" />
     </LinearLayout>
 
 </LinearLayout>

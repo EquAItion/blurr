@@ -3,14 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/liquid_glass_background">
 
     <!-- Loading overlay -->
     <LinearLayout
         android:id="@+id/loading_overlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#80000000"
+        android:background="@drawable/glass_overlay"
         android:gravity="center"
         android:orientation="vertical"
         android:visibility="gone">
@@ -63,7 +64,7 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <com.blurr.voice.views.DeltaSymbolView
+                <com.axiom.voice.ui.DeltaSymbolView
                     android:id="@+id/delta_symbol"
                     android:layout_width="250dp"
                     android:layout_height="250dp"
@@ -92,13 +93,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:background="@drawable/rounded_button"
+                android:background="@drawable/liquid_glass_button"
                 android:clickable="true"
                 android:focusable="true"
                 android:gravity="center"
-                android:padding="12dp"
+                android:padding="16dp"
                 android:text="Set as Default Assistant"
-                android:textColor="@android:color/black"
+                android:textColor="@color/text_primary"
                 android:textSize="16sp" />
 
             <!-- Action Tabs Section -->
@@ -123,28 +124,30 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:layout_marginEnd="4dp"
-                        android:background="@drawable/rounded_button"
-                        android:textColor="@color/black"                        android:clickable="true"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/liquid_glass_button"
+                        android:textColor="@color/text_primary"
+                        android:clickable="true"
                         android:focusable="true"
                         android:gravity="center"
-                        android:padding="12dp"
+                        android:padding="16dp"
                         android:text="How to wake up Panda"
-                        android:textSize="12sp" />
+                        android:textSize="13sp" />
 
                     <TextView
                         android:id="@+id/increase_limits_link"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:layout_marginStart="4dp"
-                        android:background="@drawable/rounded_button"
-                        android:textColor="@color/black"                        android:clickable="true"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/liquid_glass_button"
+                        android:textColor="@color/text_primary"
+                        android:clickable="true"
                         android:focusable="true"
                         android:gravity="center"
-                        android:padding="12dp"
+                        android:padding="16dp"
                         android:text="Email Developer"
-                        android:textSize="12sp" />
+                        android:textSize="13sp" />
 
                 </LinearLayout>
 
@@ -160,29 +163,30 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:layout_marginEnd="4dp"
-                        android:background="@drawable/rounded_button"
-                        android:textColor="@color/black"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/liquid_glass_button"
+                        android:textColor="@color/text_primary"
                         android:clickable="true"
                         android:focusable="true"
                         android:gravity="center"
-                        android:padding="12dp"
+                        android:padding="16dp"
                         android:text="Disclaimer"
-                        android:textSize="12sp" />
+                        android:textSize="13sp" />
 
                     <TextView
                         android:id="@+id/examples_link"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:layout_marginStart="4dp"
-                        android:background="@drawable/rounded_button"
-                        android:textColor="@color/black"                        android:clickable="true"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/liquid_glass_button"
+                        android:textColor="@color/text_primary"
+                        android:clickable="true"
                         android:focusable="true"
                         android:gravity="center"
-                        android:padding="12dp"
+                        android:padding="16dp"
                         android:text="Make panda do something"
-                        android:textSize="12sp" />
+                        android:textSize="13sp" />
 
                 </LinearLayout>
 
@@ -204,13 +208,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
-                    android:background="@drawable/status_tag_background"
+                    android:background="@drawable/liquid_glass_status_tag"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp"
-                    android:paddingTop="4dp"
-                    android:paddingBottom="4dp"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
                     android:visibility="gone">
 
                     <ImageView
@@ -238,13 +242,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:background="@drawable/status_tag_background"
+                    android:background="@drawable/liquid_glass_status_tag"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp"
-                    android:paddingTop="4dp"
-                    android:paddingBottom="4dp"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
                     android:visibility="gone">
 
                     <ImageView
@@ -272,13 +276,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:background="@drawable/status_tag_background"
+                    android:background="@drawable/liquid_glass_status_tag"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp"
-                    android:paddingTop="4dp"
-                    android:paddingBottom="4dp"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
                     tools:visibility="visible">
 
                     <ImageView
@@ -354,14 +358,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:background="@drawable/rounded_button"
+            android:background="@drawable/liquid_glass_button"
             android:clickable="true"
             android:focusable="true"
             android:fontFamily="@font/playfair_display"
             android:gravity="center"
-            android:padding="12dp"
+            android:padding="16dp"
             android:text="Manage Permissions"
-            android:textColor="@android:color/black"
+            android:textColor="@color/text_primary"
             android:textSize="16sp" />
     </LinearLayout>
 

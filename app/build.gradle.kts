@@ -27,7 +27,7 @@ if (versionPropsFile.exists()) {
 }
 
 android {
-    namespace = "com.blurr.voice"
+    namespace = "com.axiom.voice"
     compileSdk = 35
 
     // Common API keys and configuration - extracted to avoid duplication
@@ -47,7 +47,7 @@ android {
     val debugSha1 = "D0:A1:49:03:FD:B5:37:DF:B5:36:51:B1:66:AE:70:11:E2:59:08:33"
 
     defaultConfig {
-        applicationId = "com.blurr.voice"
+        applicationId = "com.axiom.voice"
         minSdk = 24
         targetSdk = 35
         versionCode = versionProps.getProperty("VERSION_CODE", "13").toInt()

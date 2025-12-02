@@ -1,4 +1,4 @@
-package com.blurr.voice
+package com.axiom.voice
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_solid"
+    android:background="@drawable/liquid_glass_background"
     android:clipToPadding="false"
     android:padding="16dp">
 
@@ -20,7 +20,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="24dp"
             android:text="@string/permissions_explained_title"
-            android:textColor="@android:color/white"
+            android:textColor="@color/text_primary"
             android:textSize="28sp"
             android:textStyle="bold" />
 
@@ -28,9 +28,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:background="@drawable/rounded_background"
+            android:background="@drawable/liquid_glass_card"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="20dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -43,7 +43,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="12dp"
                     android:src="@drawable/ic_accessibility"
-                    app:tint="@color/white" />
+                    app:tint="@color/text_primary" />
 
                 <TextView
                     android:id="@+id/accessibilityStatus"
@@ -74,12 +74,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:background="@drawable/rounded_button"
+            android:background="@drawable/liquid_glass_button"
             android:clickable="true"
             android:focusable="true"
             android:gravity="center"
-            android:padding="12dp"
-            android:textColor="@android:color/black"
+            android:padding="16dp"
+            android:textColor="@color/text_primary"
             android:textSize="16sp"
             android:visibility="gone"
             android:text="@string/grant_accessibility_permission"

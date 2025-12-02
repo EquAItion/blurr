@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_solid"
+    android:background="@drawable/liquid_glass_background"
     android:padding="24dp"
     tools:context=".LoginActivity">
 
@@ -23,7 +23,7 @@
         android:layout_below="@id/logoImage"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:fontFamily="@font/oxanium_extralight"
+        android:fontFamily="@font/inter"
         android:text="Voice Assistant capable of using your phone"
         android:textAlignment="center"
         android:textColor="#FFBD86"
@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp"
-            android:fontFamily="@font/oxanium"
+            android:fontFamily="@font/inter"
             android:text="OR"
             android:textColor="#C7C7C7"
             android:textStyle="normal" />
@@ -76,7 +76,7 @@
         android:layout_height="48dp"
         android:layout_below="@id/dividerContainer"
         android:layout_marginTop="12dp"
-        android:background="@drawable/input_box_background"
+        android:background="@drawable/glass_input_field"
         android:fontFamily="@font/oxanium"
         android:hint="Enter your email"
         android:inputType="textEmailAddress"
@@ -93,8 +93,8 @@
         android:fontFamily="@font/oxanium"
         android:text="Send OTP"
         android:textAllCaps="false"
-        android:textColor="@color/black"
-        app:backgroundTint="#FFBD86"
+        android:background="@drawable/glass_button"
+        android:textColor="#FFFFFF"
         app:cornerRadius="12dp" />
 
     <EditText
@@ -103,7 +103,7 @@
         android:layout_height="48dp"
         android:layout_below="@id/dividerContainer"
         android:layout_marginTop="12dp"
-        android:background="@drawable/input_box_background"
+        android:background="@drawable/glass_input_field"
         android:fontFamily="@font/oxanium"
         android:hint="Enter OTP"
         android:inputType="textEmailAddress"
@@ -118,7 +118,7 @@
         android:layout_height="48dp"
         android:layout_below="@id/otpInput"
         android:layout_marginTop="12dp"
-        android:background="@drawable/input_box_background"
+        android:background="@drawable/glass_input_field"
         android:fontFamily="@font/oxanium"
         android:hint="Enter your name"
         android:inputType="textPersonName"
@@ -136,9 +136,9 @@
         android:fontFamily="@font/oxanium"
         android:text="Verify OTP"
         android:textAllCaps="false"
-        android:textColor="@color/black"
+        android:background="@drawable/glass_button"
+        android:textColor="#FFFFFF"
         android:visibility="gone"
-        app:backgroundTint="#FFBD86"
         app:cornerRadius="12dp" />
 
 

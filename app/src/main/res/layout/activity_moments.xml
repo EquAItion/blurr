@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_solid"
+    android:background="@drawable/liquid_glass_background"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -23,7 +23,7 @@
             android:focusable="true"
             android:padding="8dp"
             android:text="← Back"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/text_primary"
             android:textSize="16sp" />
 
         <TextView
@@ -32,7 +32,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="Moments"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/text_primary"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -62,8 +62,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:text="Moments Coming Soon"
-            android:fontFamily="@font/oxanium"
-            android:textColor="#FFFFFF"
+            android:fontFamily="@font/inter"
+            android:textColor="@color/text_primary"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -72,7 +72,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="This feature will help you track and review your conversation history with Panda."
-            android:textColor="#BDBDBD"
+            android:textColor="@color/text_secondary"
             android:textSize="16sp" />
 
     </LinearLayout>
